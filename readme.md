@@ -1,9 +1,23 @@
 ## Docker-Prometheus
 
-- 文件：https://github.com/Kev1nChan/docker-prometheus
-- 文件：https://blog.techbridge.cc/2019/08/26/how-to-use-prometheus-grafana-in-flask-app/
+搭配著看的
+- [[Day27] 簡單搞懂 Prometheus 是什麼？](https://ithelp.ithome.com.tw/articles/10307286)
+- [[Day28] 簡單搞懂Prometheus Docker實作範例]()
+- [[Day29] 簡單搞懂Promethues Python FastAPI 實作範例]()
+```
+docker-prometheus/
+├── alertmanager
+│   └── config.yml
+├── docker-compose.yml
+├── grafana
+│   ├── config.monitoring
+│   └── provisioning
+└── prometheus
+    ├── alert.yml
+    └── prometheus.yml
+```
 
-- 文件
+- 參考文件
 1. https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-metrics-types
 2. https://www.twblogs.net/a/605872dab586f7f7095f4fe7(python 應用在prometheus)
 3. https://blog.csdn.net/shm19990131/article/details/107162470
@@ -13,7 +27,8 @@
 7. https://www.cnblogs.com/robinunix/p/11276296.html (node-exporter 指標含義)
 8. https://blog.csdn.net/shm19990131/article/details/107162470 (node-exporter cpu 基礎)
 9. https://pracucci.com/prometheus-understanding-the-delays-on-alerting.html(解釋警報延遲文章)
-
+10. https://blog.techbridge.cc/2019/08/26/how-to-use-prometheus-grafana-in-flask-app/
+11. https://github.com/Kev1nChan/docker-prometheus
 
 # 常見四大功能
 - Counter 計數器 只增不減（除非系统发生重置）
@@ -36,8 +51,6 @@
 2. request 超過一定量
 3. exceptions 超過一定量
 
-
-
 # 測試工具
 - 文件
 1. https://www.twblogs.net/a/5c76c100bd9eee33991815b9
@@ -48,18 +61,5 @@
 6. https://www.tigera.io/learn/guides/prometheus-monitoring/prometheus-metrics/
 
 
-
-```shell
-docker-prometheus/
-├── alertmanager
-│   └── config.yml
-├── docker-compose.yml
-├── grafana
-│   ├── config.monitoring
-│   └── provisioning
-└── prometheus
-    ├── alert.yml
-    └── prometheus.yml
-```
 指令locust -f test.py
 打開http://localhost:8089/ 做測試
