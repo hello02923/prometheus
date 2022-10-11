@@ -12,6 +12,7 @@
 6. https://awesome-prometheus-alerts.grep.to/rules.html (常見alert 規則)
 7. https://www.cnblogs.com/robinunix/p/11276296.html (node-exporter 指標含義)
 8. https://blog.csdn.net/shm19990131/article/details/107162470 (node-exporter cpu 基礎)
+9. https://pracucci.com/prometheus-understanding-the-delays-on-alerting.html(解釋警報延遲文章)
 
 
 # 常見四大功能
@@ -43,6 +44,9 @@
 2. https://blog.csdn.net/wumingxiaoyao/article/details/120799713
 3. https://docs.locust.io/en/stable/writing-a-locustfile.html#taskset-class
 4. https://danielflannery.ie/simulate-cpu-load-with-python/ (模擬cpu loading by python)
+5. https://blog.techbridge.cc/2019/05/29/how-to-use-python-locust-to-do-load-testing/ (教學文章)
+6. https://www.tigera.io/learn/guides/prometheus-monitoring/prometheus-metrics/
+
 
 
 ```shell
@@ -57,3 +61,5 @@ docker-prometheus/
     ├── alert.yml
     └── prometheus.yml
 ```
+指令locust -f test.py
+打開http://localhost:8089/ 做測試

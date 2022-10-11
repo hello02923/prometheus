@@ -26,14 +26,11 @@ services:
       - monitoring
     links:
       - alertmanager
-      # - cadvisor
       - node_exporter
     expose:
       - '9090'
     ports:
       - 9090:9090
-    # depends_on:
-    #   - cadvisor
 
   alertmanager:
     image: prom/alertmanager
@@ -51,21 +48,6 @@ services:
       - '9093'
     ports:
       - 9093:9093
-
-  # cadvisor:
-  #   image: google/cadvisor:v0.33.0
-  #   container_name: cadvisor
-  #   restart: always
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:rw
-  #     - /sys:/sys:ro
-  #     - /var/lib/docker/:/var/lib/docker:ro
-  #   networks:
-  #     - monitoring
-  #   expose:
-  #     - '8080'
 
   # node_exporter 為了能夠采集到主機的運行指標如CPU, 內存，磁盤
   node_exporter:

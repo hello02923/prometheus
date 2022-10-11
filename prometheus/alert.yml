@@ -2,51 +2,74 @@ groups:
 - name: demo
   rules:
 
-  # Alert for any instance that is unreachable for >2 minutes.
   - alert: service_down
     expr: up == 0
-    for: 1m
     labels:
       severity: page
     annotations:
       summary: "Instance {{ $labels.instance }} down"
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+  
+  # - alert: high_load
+  #   expr: node_load1 > 1
+  #   labels:
+  #     severity: page
+  #   annotations:
+  #     summary: "Instance {{ $labels.instance }} under high load"
+  #     description: "最近1分鐘內的 CPU 附載情況"
 
-  - alert: high_load
-    expr: node_load1 > 0.5 ##指1分鐘內cpu平均負載
-    for: 2m
-    labels:
-      severity: page
-    annotations:
-      summary: "Instance {{ $labels.instance }} under high load"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+  # - alert: high_load2
+  #   expr: increase(node_load1[1m]) > 0.05 
+  #   ## 最近1分鐘內cpu附載增量超過0.05 就跳警報
+  #   labels:
+  #     severity: page
+  #   annotations:
+  #     summary: "Instance {{ $labels.instance }} under high load"
+  #     description: "最近1分鐘內cpu附載增量"
+
+  # - alert: high_load3
+  #   expr: (node_load1 / 4) > 0.3
+  #   ## < 3 代表Loading ok 假設用10% 
+  #   labels:
+  #     severity: page
+  #   annotations:
+  #     summary: "Instance {{ $labels.instance }} under high load"
+  #     description: "cpu 附載情況狀態"
+
+  # - alert: high_load3
+  #   expr: avg by (instance) (irate(node_cpu_seconds_total{mode!="idle"}[1m]) * 100)
+  #   ## 平均一分鐘內非空閒cpu 平均百分比 
+  #   labels:
+  #     severity: page
+  #   annotations:
+  #     summary: "平均一分鐘內非空閒cpu 平均百分比 "
+  #     # description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+
+  # - alert: Free Disk Usage
+  #   expr: node_filesystem_avail_bytes/node_filesystem_size_bytes*100 <52.60
+  #   # labels:
+  #   #   user: test
+  #   annotations:
+  #     summary: "free disk usage to understand when there needs to be more space"
+  #     description: "{{ $labels.instance }} of job {{ $labels.job }}"
 
 
-  - alert: TooManyReq
-    expr: request_count_total > 100
-    for: 10s
-    labels:
-      user: test
-    annotations:
-      summary: "request_count_total is too over!"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has over 100 for more than 1 sec."
+  # - alert: Memory Usage
+  #   ## 記憶體使用率％
+  #   expr: ((node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Cached_bytes - node_memory_Buffers_bytes - node_memory_Slab_bytes)/node_memory_MemTotal_bytes) * 100 > 25.7
+  #   # labels:
+  #   #   user: test
+  #   annotations:
+  #     summary: " the total percentage of used memory"
+  #     description: "{{ $labels.instance }} of job {{ $labels.job }}"
 
 
-  - alert: TriggerExceptions
-    expr: request_exceptions_total > 5
-    for: 20s
-    labels:
-      user: test
-    annotations:
-      summary: "Trigger Exceptions in web-flask 5000/exceptions!"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has exceptions over 3 for more than 5 sec."
-
-
-  - alert: Latency_calltime
-    expr: hello_world_latency_seconds_sum > 4
-    for: 20s
-    labels:
-      user: test
-    annotations:
-      summary: "Create Latency in web_flask 5000/calltime!"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has latency over 4s for more than 1 min."
+  # - alert: CPU Usage 
+  #   expr: sum by (cpu)(rate(node_cpu_seconds_total{mode!="idle"}[1m])) > 0.15
+  #   # 每分鐘分空閑佔多少使用率
+  #   # sum by(cpu)(node_cpu_seconds_total{mode!='idle'})
+  #   labels:
+  #     user: test
+  #   annotations:
+  #     summary: "Create Latency in web_flask 5000/calltime!"
+  #     description: "{{ $labels.instance }} of job {{ $labels.job }} has latency over 4s for more than 1 min."
