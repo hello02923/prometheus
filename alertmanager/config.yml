@@ -1,0 +1,18 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: '信箱@gmail.com'
+  smtp_auth_username: '信箱@gmail.com'
+  smtp_auth_password: '密碼'
+  smtp_require_tls: true
+
+route:
+  group_by: ['alertname']
+  group_wait: 15s ## 將緩衝警報15S 等待同一組其他條件 要是符合就一起寄
+  group_interval: 3s ## 設置控制在發送同一組的進一步通知之前等待多長時間，並且時間間隔從發送的最後一個通知開始計算。
+  receiver: live-monitoring
+
+receivers:
+- name: 'live-monitoring'
+  # 收件人
+  email_configs:
+  - to: '收件人@gmail.com

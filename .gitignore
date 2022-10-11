@@ -1,9 +1,2 @@
-
-
-/alertmanager/config.yml
-/grafana/config.monitoring
-
-
-
 *.ipynb_checkpoints
 *__pycache__
